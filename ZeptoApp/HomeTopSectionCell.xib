@@ -20,7 +20,50 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OFO-U3-9TN" customClass="searchContainerView">
                         <rect key="frame" x="0.0" y="0.0" width="295" height="53"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TCS-zj-Nd1">
+                                <rect key="frame" x="16" y="8" width="176" height="37"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingglass" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="GGs-jR-xlm">
+                                        <rect key="frame" x="12" y="12.666666666666668" width="14" height="12.333333333333336"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="14" id="NNg-pD-U2L"/>
+                                            <constraint firstAttribute="height" constant="14" id="uyj-iQ-Age"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search for" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAE-0R-feX">
+                                        <rect key="frame" x="41" y="11.333333333333332" width="60" height="14.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="WAE-0R-feX" firstAttribute="leading" secondItem="GGs-jR-xlm" secondAttribute="trailing" constant="15" id="5Vg-VM-Rxc"/>
+                                    <constraint firstItem="GGs-jR-xlm" firstAttribute="leading" secondItem="TCS-zj-Nd1" secondAttribute="leading" constant="12" id="D7P-TL-yEi"/>
+                                    <constraint firstItem="WAE-0R-feX" firstAttribute="centerY" secondItem="GGs-jR-xlm" secondAttribute="centerY" id="jdz-yr-0Fo"/>
+                                    <constraint firstItem="GGs-jR-xlm" firstAttribute="centerY" secondItem="TCS-zj-Nd1" secondAttribute="centerY" id="qk7-sd-eQV"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Em7-fw-HLy">
+                                <rect key="frame" x="208" y="8" width="71" height="37"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.63137254901960782" green="0.77254901960784317" blue="0.7803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Em7-fw-HLy" firstAttribute="top" secondItem="OFO-U3-9TN" secondAttribute="top" constant="8" id="0rI-bF-y4e"/>
+                            <constraint firstItem="TCS-zj-Nd1" firstAttribute="leading" secondItem="OFO-U3-9TN" secondAttribute="leading" constant="16" id="3xi-f3-sWm"/>
+                            <constraint firstItem="TCS-zj-Nd1" firstAttribute="top" secondItem="OFO-U3-9TN" secondAttribute="top" constant="8" id="443-BM-mME"/>
+                            <constraint firstItem="Em7-fw-HLy" firstAttribute="leading" secondItem="TCS-zj-Nd1" secondAttribute="trailing" constant="16" id="MWl-r8-zQz"/>
+                            <constraint firstAttribute="bottom" secondItem="Em7-fw-HLy" secondAttribute="bottom" constant="8" id="XGT-T0-vG5"/>
+                            <constraint firstAttribute="bottom" secondItem="TCS-zj-Nd1" secondAttribute="bottom" constant="8" id="mJi-Mp-rDL"/>
+                            <constraint firstItem="Em7-fw-HLy" firstAttribute="centerY" secondItem="TCS-zj-Nd1" secondAttribute="centerY" id="p62-l2-wwQ"/>
+                            <constraint firstAttribute="trailing" secondItem="TCS-zj-Nd1" secondAttribute="trailing" constant="103" id="rMV-fk-qlB"/>
+                            <constraint firstAttribute="trailing" secondItem="Em7-fw-HLy" secondAttribute="trailing" constant="16" id="tJ4-eu-GqE"/>
+                        </constraints>
                     </view>
                 </subviews>
             </view>
@@ -32,10 +75,14 @@
                 <constraint firstAttribute="trailing" secondItem="OFO-U3-9TN" secondAttribute="trailing" id="pk0-Mg-qaE"/>
             </constraints>
             <size key="customSize" width="295" height="53"/>
+            <connections>
+                <outlet property="searchui" destination="TCS-zj-Nd1" id="paS-u6-cAd"/>
+            </connections>
             <point key="canvasLocation" x="310.68702290076334" y="-11.619718309859156"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
