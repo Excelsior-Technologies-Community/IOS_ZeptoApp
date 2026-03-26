@@ -18,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="295" height="53"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OFO-U3-9TN" customClass="searchContainerView">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OFO-U3-9TN">
                         <rect key="frame" x="0.0" y="0.0" width="295" height="53"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TCS-zj-Nd1">

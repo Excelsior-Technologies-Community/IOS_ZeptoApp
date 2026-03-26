@@ -7,14 +7,17 @@
 
 import UIKit
 
-import UIKit
-import UIKit
-
-import UIKit
-
+struct TabItem {
+    let title: String
+    let imageName: String
+}
 class HomeHeaderFullCell: UICollectionViewCell {
     @IBOutlet weak var SecondUIVIew: UIView!
-    
+    weak var delegate: HomeHeaderDelegate?
+    @IBOutlet weak var seonduiheight: NSLayoutConstraint!
+    @IBOutlet weak var heightconstrains: NSLayoutConstraint!
+    @IBOutlet weak var searchuiview: UIView!
+    @IBOutlet weak var tissueUIView: UIView!
     @IBOutlet weak var FirstUIVIew: UIView!
     // MARK: - Outlets
     @IBOutlet weak var collectionview: UICollectionView!
@@ -34,9 +37,16 @@ class HomeHeaderFullCell: UICollectionViewCell {
     @IBOutlet weak var thirdItemView: UIView!
     @IBOutlet weak var fourthItemView: UIView!
 
+    var onCategorySelected: ((Int) -> Void)?
     // MARK: - Data
-    let tabs = ["All", "Sale", "Home", "Beauty", "Dairy"]
-
+    
+    let tabs: [TabItem] = [
+        TabItem(title: "All", imageName: "all_icon"),
+        TabItem(title: "Sale", imageName: "sale_icon"),
+        TabItem(title: "Home", imageName: "home_icon"),
+        TabItem(title: "Beauty", imageName: "beauty_icon"),
+        TabItem(title: "Dairy", imageName: "dairy_icon")
+    ]
     var mainViews: [UIView] {
         return [
             zeptoMainUIview,   // index 0
@@ -67,6 +77,8 @@ class HomeHeaderFullCell: UICollectionViewCell {
 
     // MARK: - UI Setup
     func setupUI() {
+        searchuiview.layer.cornerRadius = 10
+        tissueUIView.layer.cornerRadius = 10
         // Apply ONLY TOP corner radius
         mainViews.forEach {
             $0.layer.cornerRadius = 12
@@ -80,15 +92,15 @@ class HomeHeaderFullCell: UICollectionViewCell {
 
     // MARK: - CollectionView Setup
     func setupCollectionView() {
-        collectionview.delegate = self
-        collectionview.dataSource = self
+//        collectionview.delegate = self
+//        collectionview.dataSource = self
         
-        collectionview.register(UINib(nibName: "TabButtonCell", bundle: nil),
-                                forCellWithReuseIdentifier: "TabButtonCell")
+//        collectionview.register(UINib(nibName: "TabButtonCell", bundle: nil),
+//                                forCellWithReuseIdentifier: "TabButtonCell")
         
-        if let layout = collectionview.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-        }
+//        if let layout = collectionview.collectionViewLayout as? UICollectionViewFlowLayout {
+//            layout.scrollDirection = .horizontal
+//        }
     }
 
     // MARK: - Gesture Setup
@@ -102,33 +114,31 @@ class HomeHeaderFullCell: UICollectionViewCell {
         }
     }
 
-    // MARK: - Tap Handler
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
         guard let index = sender.view?.tag else { return }
-        
-        print("Tapped index:", index) // 🔥 debug
-        
+
+        print("Selected:", index)
+
         updateSelection(index: index)
+
+        delegate?.didSelectCategory(index: index) // 🔥 IMPORTANT
     }
     
     func updateSelection(index: Int) {
 
-        // Reset everything
-        for view in mainViews {
-            view.backgroundColor = .clear
-        }
+        print("Selected:", index) // debug
 
-        for view in itemViews {
-            view.backgroundColor = .clear
-        }
+        // Reset
+        mainViews.forEach { $0.backgroundColor = .clear }
+        itemViews.forEach { $0.backgroundColor = .clear }
 
         FirstUIVIew.backgroundColor = .clear
         SecondUIVIew.backgroundColor = .clear
 
         switch index {
 
-        // 🔵 Zepto
-        case 0:
+        case 0: // Zepto
+            print("Zepto selected")
             let light = UIColor(hex: "#B9D7DB")
             let dark = UIColor(hex: "#A1C5C7")
 
@@ -137,28 +147,8 @@ class HomeHeaderFullCell: UICollectionViewCell {
             SecondUIVIew.backgroundColor = dark
             zeptoMainUIview.backgroundColor = light
 
-        // 🟡 Cafe
-        case 2:
-            let light = UIColor(hex: "#FDE2AB")
-            let dark = UIColor(hex: "#FFF1DA")
-
-            SecondsUI.backgroundColor = light
-            FirstUIVIew.backgroundColor = dark
-            SecondUIVIew.backgroundColor = dark
-            cafeMainUIview.backgroundColor = light
-
-        // 🔵 Fresh ✅
-        case 3:
-            let light = UIColor(hex: "#9CE4FE")
-            let dark = UIColor(hex: "#DFF6FF")
-
-            SecondsUI.backgroundColor = light
-            FirstUIVIew.backgroundColor = dark
-            SecondUIVIew.backgroundColor = dark
-            freshMainUIview.backgroundColor = light
-
-        // 🔵 Off
-        case 1:
+        case 1: // Off ✅
+            print("Off selected")
             let light = UIColor(hex: "#C4D9FE")
             let dark = UIColor(hex: "#F1F5FE")
 
@@ -167,44 +157,64 @@ class HomeHeaderFullCell: UICollectionViewCell {
             SecondUIVIew.backgroundColor = dark
             offMainUIview.backgroundColor = light
 
+        case 2: // Cafe
+            print("Cafe selected")
+            let light = UIColor(hex: "#FDE2AB")
+            let dark = UIColor(hex: "#FFF1DA")
+
+            SecondsUI.backgroundColor = light
+            FirstUIVIew.backgroundColor = dark
+            SecondUIVIew.backgroundColor = dark
+            cafeMainUIview.backgroundColor = light
+
+        case 3: // Fresh
+            print("Fresh selected")
+            let light = UIColor(hex: "#9CE4FE")
+            let dark = UIColor(hex: "#DFF6FF")
+
+            SecondsUI.backgroundColor = light
+            FirstUIVIew.backgroundColor = dark
+            SecondUIVIew.backgroundColor = dark
+            freshMainUIview.backgroundColor = light
+
         default:
             break
         }
     }
 }
 
-
-extension HomeHeaderFullCell: UICollectionViewDelegate,
-                              UICollectionViewDataSource,
-                              UICollectionViewDelegateFlowLayout {
-
-    func collectionView(_ collectionView: UICollectionView,
-                        numberOfItemsInSection section: Int) -> Int {
-        return tabs.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "TabButtonCell",
-            for: indexPath
-        ) as! TabButtonCell
-
-        cell.button.setTitle(tabs[indexPath.item], for: .normal)
-
-        return cell
-    }
-
-    // Equal width (NO SCROLL)
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        let width = collectionView.frame.width / CGFloat(tabs.count)
-        return CGSize(width: width, height: collectionView.frame.height)
-    }
-}
+//
+//extension HomeHeaderFullCell: UICollectionViewDelegate,
+//                              UICollectionViewDataSource,
+//                              UICollectionViewDelegateFlowLayout {
+//
+//    func collectionView(_ collectionView: UICollectionView,
+//                        numberOfItemsInSection section: Int) -> Int {
+//        return tabs.count
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView,
+//                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//
+//        let cell = collectionView.dequeueReusableCell(
+//            withReuseIdentifier: "TabButtonCell",
+//            for: indexPath
+//        ) as! TabButtonCell
+//
+//        cell.button.setTitle(tabs[indexPath.item], for: .normal)
+//
+//        return cell
+//    }
+//
+//    // Equal width (NO SCROLL)
+//    func collectionView(_ collectionView: UICollectionView,
+//                        layout collectionViewLayout: UICollectionViewLayout,
+//                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+//
+//        let width = collectionView.frame.width / CGFloat(tabs.count)
+//        return CGSize(width: width, height: collectionView.frame.height)
+//    }
+//}
 extension UIColor {
     convenience init(hex: String) {
         var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -219,4 +229,7 @@ extension UIColor {
 
         self.init(red: r, green: g, blue: b, alpha: 1.0)
     }
+}
+protocol HomeHeaderDelegate: AnyObject {
+    func didSelectCategory(index: Int)
 }

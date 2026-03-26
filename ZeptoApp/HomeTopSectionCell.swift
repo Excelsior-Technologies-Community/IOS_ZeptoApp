@@ -13,10 +13,10 @@ class HomeTopSectionCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        searchui.layer.borderColor = UIColor.black.cgColor
+        
         
         searchui.layer.cornerRadius = 15
-        searchui.layer.borderWidth = 0.9
+        
     }
 
 }
