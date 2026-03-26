@@ -17,7 +17,6 @@ class HorizontalProductsCell: UICollectionViewCell {
         Product(name: "apple", weight: "1 kg", price: "₹120", cutPrice: "₹150", imageName: "apple", discount: "20% OFF"),
         Product(name: "mango", weight: "1 kg", price: "₹120", cutPrice: "₹150", imageName: "apple", discount: "20% OFF")
     ]
-
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -64,6 +63,6 @@ extension HorizontalProductsCell: UICollectionViewDelegate,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        return CGSize(width: 130, height: 220)
+        return CGSize(width: 160, height: 220)
     }
 }

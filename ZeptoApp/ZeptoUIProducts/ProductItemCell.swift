@@ -23,7 +23,7 @@ class ProductItemCell: UICollectionViewCell {
     }
 
     func configure(with product: Product) {
-
+        print("Discount:", product.discount)
         productImageView.image = UIImage(named: product.imageName)
 
         mainview.layer.cornerRadius = 15

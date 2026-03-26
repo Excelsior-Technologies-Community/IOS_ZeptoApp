@@ -318,11 +318,14 @@
                 <outlet property="SecondUIVIew" destination="xYe-Ge-1Dg" id="DwD-Zr-FoW"/>
                 <outlet property="SecondsUI" destination="kCn-a8-7Iw" id="T99-hN-dix"/>
                 <outlet property="ThirdView" destination="KD7-X0-qT8" id="ERm-bt-j5v"/>
+                <outlet property="cafeImage" destination="I97-N0-BZI" id="P0R-5V-II2"/>
                 <outlet property="cafeMainUIview" destination="TsG-6b-CEm" id="Gqa-4w-hoj"/>
                 <outlet property="firstItemView" destination="jiB-wV-TTy" id="mD1-Qy-1e1"/>
                 <outlet property="fourthItemView" destination="xDX-Eo-nyr" id="9jy-uA-B9l"/>
+                <outlet property="freshImage" destination="yyg-5h-GYt" id="sdv-hi-jRA"/>
                 <outlet property="freshMainUIview" destination="COn-5C-1WA" id="gdx-q8-NIV"/>
                 <outlet property="offMainUIview" destination="qE8-8c-QFw" id="XDE-lg-9rc"/>
+                <outlet property="offimage" destination="gzP-8p-V5j" id="UFf-QQ-7dB"/>
                 <outlet property="searchUI" destination="hDh-72-Dvg" id="qnx-51-aQ8"/>
                 <outlet property="searchuiview" destination="hDh-72-Dvg" id="l7P-ex-MJg"/>
                 <outlet property="secondItemView" destination="Vwk-4r-fga" id="YdP-7k-asj"/>
@@ -330,6 +333,7 @@
                 <outlet property="thirdItemView" destination="2rn-6C-A4Y" id="CVN-WZ-Vlz"/>
                 <outlet property="tissueUI" destination="KD7-X0-qT8" id="6AP-R2-vfw"/>
                 <outlet property="tissueUIView" destination="KD7-X0-qT8" id="jkT-9I-yoH"/>
+                <outlet property="zeptoImage" destination="htY-1J-jMa" id="xOr-zm-NnQ"/>
                 <outlet property="zeptoMainUIview" destination="aZ9-2q-VzZ" id="fiA-uy-cet"/>
             </connections>
             <point key="canvasLocation" x="130.53435114503816" y="30.281690140845072"/>

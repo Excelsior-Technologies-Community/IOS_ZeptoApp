@@ -13,6 +13,7 @@ struct TabItem {
 }
 class HomeHeaderFullCell: UICollectionViewCell {
     @IBOutlet weak var SecondUIVIew: UIView!
+    @IBOutlet weak var zeptoImage: UIImageView!
     weak var delegate: HomeHeaderDelegate?
     @IBOutlet weak var seonduiheight: NSLayoutConstraint!
     @IBOutlet weak var heightconstrains: NSLayoutConstraint!
@@ -37,6 +38,9 @@ class HomeHeaderFullCell: UICollectionViewCell {
     @IBOutlet weak var thirdItemView: UIView!
     @IBOutlet weak var fourthItemView: UIView!
 
+    @IBOutlet weak var freshImage: UIImageView!
+    @IBOutlet weak var cafeImage: UIImageView!
+    @IBOutlet weak var offimage: UIImageView!
     var onCategorySelected: ((Int) -> Void)?
     // MARK: - Data
     
@@ -75,11 +79,27 @@ class HomeHeaderFullCell: UICollectionViewCell {
         
     }
 
-    // MARK: - UI Setup
     func setupUI() {
+
+        // Default selection (Zepto selected)
+        zeptoImage.image = UIImage(named: "zepto_selected")
+        offimage.image = UIImage(named: "off")
+        cafeImage.image = UIImage(named: "cafe")
+        freshImage.image = UIImage(named: "fresh")
+
+        zeptoImage.layer.cornerRadius = 10
+        offimage.layer.cornerRadius = 10
+        cafeImage.layer.cornerRadius = 10
+        freshImage.layer.cornerRadius = 10
+
+        zeptoImage.clipsToBounds = true
+        offimage.clipsToBounds = true
+        cafeImage.clipsToBounds = true
+        freshImage.clipsToBounds = true
+
         searchuiview.layer.cornerRadius = 10
         tissueUIView.layer.cornerRadius = 10
-        // Apply ONLY TOP corner radius
+
         mainViews.forEach {
             $0.layer.cornerRadius = 12
             $0.clipsToBounds = true
@@ -126,19 +146,24 @@ class HomeHeaderFullCell: UICollectionViewCell {
     
     func updateSelection(index: Int) {
 
-        print("Selected:", index) // debug
+        print("Selected:", index)
 
-        // Reset
+        // 🔹 Reset backgrounds
         mainViews.forEach { $0.backgroundColor = .clear }
         itemViews.forEach { $0.backgroundColor = .clear }
 
         FirstUIVIew.backgroundColor = .clear
         SecondUIVIew.backgroundColor = .clear
 
+        // 🔹 Reset ALL images to NORMAL
+        zeptoImage.image = UIImage(named: "zepto")
+        offimage.image = UIImage(named: "off")
+        cafeImage.image = UIImage(named: "cafe")
+        freshImage.image = UIImage(named: "fresh")
+
         switch index {
 
-        case 0: // Zepto
-            print("Zepto selected")
+        case 0: // ✅ ZEPTO
             let light = UIColor(hex: "#B9D7DB")
             let dark = UIColor(hex: "#A1C5C7")
 
@@ -147,8 +172,10 @@ class HomeHeaderFullCell: UICollectionViewCell {
             SecondUIVIew.backgroundColor = dark
             zeptoMainUIview.backgroundColor = light
 
-        case 1: // Off ✅
-            print("Off selected")
+            // 🔥 Change image
+            zeptoImage.image = UIImage(named: "zepto_selected")
+
+        case 1: // ✅ OFF
             let light = UIColor(hex: "#C4D9FE")
             let dark = UIColor(hex: "#F1F5FE")
 
@@ -157,8 +184,10 @@ class HomeHeaderFullCell: UICollectionViewCell {
             SecondUIVIew.backgroundColor = dark
             offMainUIview.backgroundColor = light
 
-        case 2: // Cafe
-            print("Cafe selected")
+            // 🔥 Change image
+            offimage.image = UIImage(named: "off_selected")
+
+        case 2: // ✅ CAFE
             let light = UIColor(hex: "#FDE2AB")
             let dark = UIColor(hex: "#FFF1DA")
 
@@ -167,8 +196,10 @@ class HomeHeaderFullCell: UICollectionViewCell {
             SecondUIVIew.backgroundColor = dark
             cafeMainUIview.backgroundColor = light
 
-        case 3: // Fresh
-            print("Fresh selected")
+            // 🔥 Change image
+            cafeImage.image = UIImage(named: "cafe_selected")
+
+        case 3: // ✅ FRESH
             let light = UIColor(hex: "#9CE4FE")
             let dark = UIColor(hex: "#DFF6FF")
 
@@ -176,6 +207,9 @@ class HomeHeaderFullCell: UICollectionViewCell {
             FirstUIVIew.backgroundColor = dark
             SecondUIVIew.backgroundColor = dark
             freshMainUIview.backgroundColor = light
+
+            // 🔥 Change image
+            freshImage.image = UIImage(named: "fresh_selected")
 
         default:
             break
