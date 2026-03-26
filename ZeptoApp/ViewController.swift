@@ -10,13 +10,15 @@ import UIKit
 struct BannerItem {
     let imageName: String
 }
-
+enum HomeType {
+    case zepto
+    case off
+    case cafe
+    case fresh
+}
 class ViewController: UIViewController {
   
-
-   
-
-    
+    var currentType : HomeType = .zepto
     var isTabsHidden = false
     var selectedIndex: Int = 0
     @IBOutlet weak var Collectionview: UICollectionView!
@@ -31,7 +33,20 @@ class ViewController: UIViewController {
     func RegisterXibs(){
         Collectionview.delegate = self
         Collectionview.dataSource = self
-      
+        Collectionview.register(UINib(nibName: "ZeptoContentCell", bundle: nil),
+                                forCellWithReuseIdentifier: "ZeptoContentCell")
+        Collectionview.register(
+            UINib(nibName: "SeeMoreCell", bundle: nil),
+            forCellWithReuseIdentifier: "SeeMoreCell"
+        )
+        Collectionview.register(UINib(nibName: "OffContentCell", bundle: nil),
+                                forCellWithReuseIdentifier: "OffContentCell")
+
+        Collectionview.register(UINib(nibName: "CafeContentCell", bundle: nil),
+                                forCellWithReuseIdentifier: "CafeContentCell")
+
+        Collectionview.register(UINib(nibName: "FreshContentCell", bundle: nil),
+                                forCellWithReuseIdentifier: "FreshContentCell")
         Collectionview.register(UINib(nibName: "ZeptoHeaderView", bundle: nil),  forCellWithReuseIdentifier: "ZeptoHeaderView")
         Collectionview.register(UINib(nibName: "HomeTopSectionCell", bundle: nil),  forCellWithReuseIdentifier: "HomeTopSectionCell")
         Collectionview.register(UINib(nibName: "HomeHeaderFullCell", bundle: nil),  forCellWithReuseIdentifier: "HomeHeaderFullCell")
@@ -46,13 +61,12 @@ extension ViewController: UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
 
-        return isTabsHidden ? 1 : 2
+        return isTabsHidden ? 2 : 3
     }
-
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        // Header
+        // 0 → Header
         if indexPath.item == 0 {
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: "HomeHeaderFullCell",
@@ -63,13 +77,41 @@ extension ViewController: UICollectionViewDataSource,
             return cell
         }
 
-        // Tabs (only when visible)
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "TabsCell",
-            for: indexPath
-        )
+        // 1 → Tabs (only for Zepto)
+        if !isTabsHidden && indexPath.item == 1 {
+            return collectionView.dequeueReusableCell(
+                withReuseIdentifier: "TabsCell",
+                for: indexPath
+            )
+        }
 
-        return cell
+        // 2 → Dynamic Content UI
+        switch currentType {
+
+        case .zepto:
+            return collectionView.dequeueReusableCell(
+                withReuseIdentifier: "ZeptoContentCell",
+                for: indexPath
+            )
+
+        case .off:
+            return collectionView.dequeueReusableCell(
+                withReuseIdentifier: "OffContentCell",
+                for: indexPath
+            )
+
+        case .cafe:
+            return collectionView.dequeueReusableCell(
+                withReuseIdentifier: "CafeContentCell",
+                for: indexPath
+            )
+
+        case .fresh:
+            return collectionView.dequeueReusableCell(
+                withReuseIdentifier: "FreshContentCell",
+                for: indexPath
+            )
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -86,24 +128,33 @@ extension ViewController: UICollectionViewDataSource,
             return CGSize(width: width, height: 80)
         }
 
-        return CGSize(width: width, height: 180)
+        // Content UI
+        return CGSize(width: width, height: 550)
     }
 }
-
 extension ViewController: HomeHeaderDelegate {
 
     func didSelectCategory(index: Int) {
 
-        print("Tapped index:", index)
-
-        selectedIndex = index
-
-        if index == 0 {
-            
+        switch index {
+        case 0:
+            currentType = .zepto
             isTabsHidden = false
-        } else {
-            
+
+        case 1:
+            currentType = .off
             isTabsHidden = true
+
+        case 2:
+            currentType = .cafe
+            isTabsHidden = true
+
+        case 3:
+            currentType = .fresh
+            isTabsHidden = true
+
+        default:
+            break
         }
 
         Collectionview.reloadData()
