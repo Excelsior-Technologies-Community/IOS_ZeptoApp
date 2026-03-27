@@ -9,9 +9,10 @@ import UIKit
 
 class SeeMoreCell: UICollectionViewCell {
 
+    @IBOutlet weak var seemoreUI: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        seemoreUI.layer.cornerRadius = 15
     }
 
 }

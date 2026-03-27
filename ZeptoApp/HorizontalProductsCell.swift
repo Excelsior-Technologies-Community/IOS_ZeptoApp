@@ -63,6 +63,6 @@ extension HorizontalProductsCell: UICollectionViewDelegate,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        return CGSize(width: 160, height: 220)
+        return CGSize(width: 160, height: 200)
     }
 }

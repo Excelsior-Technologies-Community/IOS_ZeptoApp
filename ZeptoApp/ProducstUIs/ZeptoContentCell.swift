@@ -35,7 +35,7 @@ extension ZeptoContentCell: UICollectionViewDelegate,
                             UICollectionViewDelegateFlowLayout {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2 // Top + Grid
+        return 2
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -78,9 +78,9 @@ extension ZeptoContentCell: UICollectionViewDelegate,
         let width = collectionView.frame.width
 
         if indexPath.section == 0 {
-            return CGSize(width: width, height: 550) // Top full UI
+            return CGSize(width: width, height: 590)
         } else {
-            return CGSize(width: width, height: 280)
+            return CGSize(width: width, height: 0)
         }
     }
     

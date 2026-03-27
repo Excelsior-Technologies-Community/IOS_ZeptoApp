@@ -42,7 +42,8 @@ class ZeptoProductsTopPartCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.delegate = self
         collectionView.dataSource = self
 
@@ -59,8 +60,8 @@ class ZeptoProductsTopPartCell: UICollectionViewCell {
         )
 
         collectionView.register(
-            UINib(nibName: "ProductGridCell", bundle: nil),
-            forCellWithReuseIdentifier: "ProductGridCell"
+            UINib(nibName: "ZeptoCategoryCell", bundle: nil),
+            forCellWithReuseIdentifier: "ZeptoCategoryCell"
         )
 
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -75,7 +76,7 @@ extension ZeptoProductsTopPartCell: UICollectionViewDelegate,
 
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -87,14 +88,25 @@ extension ZeptoProductsTopPartCell: UICollectionViewDelegate,
             )
         }
 
-        
+        if indexPath.item == 1 {
             return collectionView.dequeueReusableCell(
                 withReuseIdentifier: "SeeMoreCell",
                 for: indexPath
             )
+        }
+        return collectionView.dequeueReusableCell(
+            withReuseIdentifier: "ZeptoCategoryCell",
+            for: indexPath
+        )
         
     }
 
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 2
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 2
+    }
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -105,8 +117,12 @@ extension ZeptoProductsTopPartCell: UICollectionViewDelegate,
             return CGSize(width: width, height: 260) // horizontal products
         }
 
-        
+        if indexPath.item == 1 {
             return CGSize(width: width, height: 50) // see more
+        }
+        
+        
+        return CGSize(width: width, height: 230)
      
     }
 }
