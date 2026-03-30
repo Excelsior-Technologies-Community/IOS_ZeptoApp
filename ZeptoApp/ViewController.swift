@@ -46,7 +46,8 @@ class ViewController: UIViewController {
 
         Collectionview.register(UINib(nibName: "CafeContentCell", bundle: nil),
                                 forCellWithReuseIdentifier: "CafeContentCell")
-
+        Collectionview.register(UINib(nibName: "CategorySectionCell", bundle: nil),
+                                forCellWithReuseIdentifier: "CategorySectionCell")
         Collectionview.register(UINib(nibName: "FreshContentCell", bundle: nil),
                                 forCellWithReuseIdentifier: "FreshContentCell")
         Collectionview.register(UINib(nibName: "ZeptoHeaderView", bundle: nil),  forCellWithReuseIdentifier: "ZeptoHeaderView")
@@ -64,7 +65,7 @@ extension ViewController: UICollectionViewDataSource,
                         numberOfItemsInSection section: Int) -> Int {
 
         // Header + (Tabs optional) + Content + Coupons
-        return isTabsHidden ? 3 : 4
+        return isTabsHidden ? 3 : 5
     }
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -120,10 +121,18 @@ extension ViewController: UICollectionViewDataSource,
             }
         }
 
-        // 🔥 3 → CouponsOffersCell (NEW)
+        // 3 → Coupons
         if indexPath.item == contentIndex + 1 {
             return collectionView.dequeueReusableCell(
                 withReuseIdentifier: "CouponsOffersCell",
+                for: indexPath
+            )
+        }
+
+        // 🔥 4 → Categories (NEW)
+        if indexPath.item == contentIndex + 2 {
+            return collectionView.dequeueReusableCell(
+                withReuseIdentifier: "CategorySectionCell",
                 for: indexPath
             )
         }
@@ -157,6 +166,12 @@ extension ViewController: UICollectionViewDataSource,
             return CGSize(width: width, height: 300)
         }
 
+        
+        if indexPath.item == contentIndex + 2 {
+            return CGSize(width: width, height: 1350)
+        }
+
+        
         return CGSize(width: width, height: 0)
     }
 }
