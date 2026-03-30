@@ -6,15 +6,8 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		FEABCDA92F764FD4001DF213 /* CategoryGridItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEABCDA82F764FD4001DF213 /* CategoryGridItemCell.xib */; };
-		FEABCDAA2F764FD4001DF213 /* CategoryGridItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEABCDA72F764FD4001DF213 /* CategoryGridItemCell.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
 		FEABCD3C2F726817001DF213 /* ZeptoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZeptoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		FEABCDA72F764FD4001DF213 /* CategoryGridItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryGridItemCell.swift; sourceTree = "<group>"; };
-		FEABCDA82F764FD4001DF213 /* CategoryGridItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryGridItemCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -52,8 +45,6 @@
 		FEABCD332F726817001DF213 = {
 			isa = PBXGroup;
 			children = (
-				FEABCDA72F764FD4001DF213 /* CategoryGridItemCell.swift */,
-				FEABCDA82F764FD4001DF213 /* CategoryGridItemCell.xib */,
 				FEABCD3E2F726817001DF213 /* ZeptoApp */,
 				FEABCD3D2F726817001DF213 /* Products */,
 			);
@@ -131,7 +122,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FEABCDA92F764FD4001DF213 /* CategoryGridItemCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,7 +132,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FEABCDAA2F764FD4001DF213 /* CategoryGridItemCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,7 +17,9 @@ enum HomeType {
     case fresh
 }
 class ViewController: UIViewController {
-  
+    var contentStartIndex: Int {
+        return isTabsHidden ? 1 : 2
+    }
     var currentType : HomeType = .zepto
     var isTabsHidden = false
     var selectedIndex: Int = 0
@@ -50,8 +52,8 @@ class ViewController: UIViewController {
         Collectionview.register(UINib(nibName: "ZeptoHeaderView", bundle: nil),  forCellWithReuseIdentifier: "ZeptoHeaderView")
         Collectionview.register(UINib(nibName: "HomeTopSectionCell", bundle: nil),  forCellWithReuseIdentifier: "HomeTopSectionCell")
         Collectionview.register(UINib(nibName: "HomeHeaderFullCell", bundle: nil),  forCellWithReuseIdentifier: "HomeHeaderFullCell")
-        Collectionview.register(UINib(nibName: "TabsCell", bundle: nil),
-                                forCellWithReuseIdentifier: "TabsCell")
+        Collectionview.register(UINib(nibName: "TabsCell", bundle: nil),  forCellWithReuseIdentifier: "TabsCell")
+        Collectionview.register(UINib(nibName: "CouponsOffersCell", bundle: nil),  forCellWithReuseIdentifier: "CouponsOffersCell")
     }
 }
 extension ViewController: UICollectionViewDataSource,
@@ -61,7 +63,8 @@ extension ViewController: UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
 
-        return isTabsHidden ? 2 : 3
+        // Header + (Tabs optional) + Content + Coupons
+        return isTabsHidden ? 3 : 4
     }
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -77,7 +80,7 @@ extension ViewController: UICollectionViewDataSource,
             return cell
         }
 
-        // 1 → Tabs (only for Zepto)
+        // 1 → Tabs
         if !isTabsHidden && indexPath.item == 1 {
             return collectionView.dequeueReusableCell(
                 withReuseIdentifier: "TabsCell",
@@ -85,33 +88,47 @@ extension ViewController: UICollectionViewDataSource,
             )
         }
 
-        // 2 → Dynamic Content UI
-        switch currentType {
+        let contentIndex = contentStartIndex
 
-        case .zepto:
-            return collectionView.dequeueReusableCell(
-                withReuseIdentifier: "ZeptoContentCell",
-                for: indexPath
-            )
+        // 2 → Main Content
+        if indexPath.item == contentIndex {
+            switch currentType {
 
-        case .off:
-            return collectionView.dequeueReusableCell(
-                withReuseIdentifier: "OffContentCell",
-                for: indexPath
-            )
+            case .zepto:
+                return collectionView.dequeueReusableCell(
+                    withReuseIdentifier: "ZeptoContentCell",
+                    for: indexPath
+                )
 
-        case .cafe:
-            return collectionView.dequeueReusableCell(
-                withReuseIdentifier: "CafeContentCell",
-                for: indexPath
-            )
+            case .off:
+                return collectionView.dequeueReusableCell(
+                    withReuseIdentifier: "OffContentCell",
+                    for: indexPath
+                )
 
-        case .fresh:
+            case .cafe:
+                return collectionView.dequeueReusableCell(
+                    withReuseIdentifier: "CafeContentCell",
+                    for: indexPath
+                )
+
+            case .fresh:
+                return collectionView.dequeueReusableCell(
+                    withReuseIdentifier: "FreshContentCell",
+                    for: indexPath
+                )
+            }
+        }
+
+        // 🔥 3 → CouponsOffersCell (NEW)
+        if indexPath.item == contentIndex + 1 {
             return collectionView.dequeueReusableCell(
-                withReuseIdentifier: "FreshContentCell",
+                withReuseIdentifier: "CouponsOffersCell",
                 for: indexPath
             )
         }
+
+        return UICollectionViewCell()
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -128,8 +145,19 @@ extension ViewController: UICollectionViewDataSource,
             return CGSize(width: width, height: 80)
         }
 
-        // Content UI
-        return CGSize(width: width, height: 550)
+        let contentIndex = contentStartIndex
+
+        // Main Content
+        if indexPath.item == contentIndex {
+            return CGSize(width: width, height: 550)
+        }
+
+        // 🔥 Coupons
+        if indexPath.item == contentIndex + 1 {
+            return CGSize(width: width, height: 300)
+        }
+
+        return CGSize(width: width, height: 0)
     }
 }
 extension ViewController: HomeHeaderDelegate {
