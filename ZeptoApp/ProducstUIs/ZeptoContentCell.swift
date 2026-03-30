@@ -80,7 +80,7 @@ extension ZeptoContentCell: UICollectionViewDelegate,
         if indexPath.section == 0 {
             return CGSize(width: width, height: 590)
         } else {
-            return CGSize(width: width, height: 0)
+            return CGSize(width: width, height: 80)
         }
     }
     
