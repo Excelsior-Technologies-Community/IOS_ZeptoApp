@@ -14,8 +14,8 @@ enum DealType: Int, CaseIterable {
     
     var title: String {
         switch self {
-        case .best: return "Best Deals"
-        case .nine: return "₹9"
+        case .best: return "₹9"
+        case .nine: return "₹19"
         case .nineteen: return "₹19"
         }
     }
@@ -119,15 +119,33 @@ extension DealsSectionView: UICollectionViewDelegate, UICollectionViewDataSource
             return products[deal]?.count ?? 0
         }
     }
-    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        if collectionView == leftCollectionView {
+            
+            let totalItems = DealType.allCases.count
+            let height = collectionView.frame.height / CGFloat(totalItems) - 10
+            
+            return CGSize(width: collectionView.frame.width, height: height)
+        }
+        
+        
+        
+        return CGSize(width: 120, height: 190)
+    }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if collectionView == leftCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeftMenuCell", for: indexPath) as! LeftMenuCell
             
             let deal = DealType.allCases[indexPath.item]
-            cell.configure(title: deal.title, isSelected: indexPath.item == selectedIndex)
-            
+            cell.configure(
+                title: deal.title,
+                isSelected: indexPath.item == selectedIndex,
+                index: indexPath.item   // ✅ add this
+            )
             return cell
             
         } else {
