@@ -41,8 +41,8 @@ class ViewController: UIViewController {
             UINib(nibName: "SeeMoreCell", bundle: nil),
             forCellWithReuseIdentifier: "SeeMoreCell"
         )
-        Collectionview.register(UINib(nibName: "OffContentCell", bundle: nil),
-                                forCellWithReuseIdentifier: "OffContentCell")
+        Collectionview.register(UINib(nibName: "OffContentCell", bundle: nil),forCellWithReuseIdentifier: "OffContentCell")
+        Collectionview.register(UINib(nibName: "DealsSectionView", bundle: nil),forCellWithReuseIdentifier: "DealsSectionView")
 
         Collectionview.register(UINib(nibName: "CafeContentCell", bundle: nil),
                                 forCellWithReuseIdentifier: "CafeContentCell")
@@ -65,7 +65,7 @@ extension ViewController: UICollectionViewDataSource,
                         numberOfItemsInSection section: Int) -> Int {
 
         // Header + (Tabs optional) + Content + Coupons
-        return isTabsHidden ? 3 : 5
+        return isTabsHidden ? 5 : 6
     }
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -136,6 +136,13 @@ extension ViewController: UICollectionViewDataSource,
                 for: indexPath
             )
         }
+        // 🔥 4 → Categories (NEW)
+        if indexPath.item == contentIndex + 3 {
+            return collectionView.dequeueReusableCell(
+                withReuseIdentifier: "DealsSectionView",
+                for: indexPath
+            )
+        }
 
         return UICollectionViewCell()
     }
@@ -169,6 +176,9 @@ extension ViewController: UICollectionViewDataSource,
         
         if indexPath.item == contentIndex + 2 {
             return CGSize(width: width, height: 1350)
+        }
+        if indexPath.item == contentIndex + 3 {
+            return CGSize(width: width, height: 450)
         }
 
         

@@ -26,25 +26,25 @@ class CategorySectionCell: UICollectionViewCell {
         ]),
 
         ("Household Essentials", [
-            CategoryItem(title: "Home Needs", imageName: "home1"),
-            CategoryItem(title: "Kitchen & Dining", imageName: "home2"),
-            CategoryItem(title: "Cleaning Essentials", imageName: "home3"),
-            CategoryItem(title: "Electronics", imageName: "home4"),
-            CategoryItem(title: "Pet Care", imageName: "home5"),
-            CategoryItem(title: "Toys & Sports", imageName: "home6"),
-            CategoryItem(title: "Stationery", imageName: "home7"),
-            CategoryItem(title: "Paan Corner", imageName: "home8")
+            CategoryItem(title: "Home Needs", imageName: "HomeIcon"),
+            CategoryItem(title: "Kitchen & Dining", imageName: "kitchen"),
+            CategoryItem(title: "Cleaning Essentials", imageName: "Cleaning"),
+            CategoryItem(title: "Electronics", imageName: "Electronics"),
+            CategoryItem(title: "Pet Care", imageName: "pets"),
+            CategoryItem(title: "Toys & Sports", imageName: "uni"),
+            CategoryItem(title: "Stationery", imageName: "stationary"),
+            CategoryItem(title: "Paan Corner", imageName: "paan")
         ]),
 
         ("Shop by Store", [
-            CategoryItem(title: "Summer Store", imageName: "store1"),
-            CategoryItem(title: "Gift Store", imageName: "store2"),
-            CategoryItem(title: "Ayush Store", imageName: "store3"),
-            CategoryItem(title: "Pooja Store", imageName: "store4"),
-            CategoryItem(title: "Wedding Store", imageName: "store5"),
-            CategoryItem(title: "Global Store", imageName: "store6"),
-            CategoryItem(title: "Sports Store", imageName: "store7"),
-            CategoryItem(title: "Decor Store", imageName: "store8")
+            CategoryItem(title: "Summer Store", imageName: "Summer"),
+            CategoryItem(title: "Gift Store", imageName: "Gift"),
+            CategoryItem(title: "Ayush Store", imageName: "Ayush"),
+            CategoryItem(title: "Pooja Store", imageName: "Pooja"),
+            CategoryItem(title: "Wedding Store", imageName: "Wedding"),
+            CategoryItem(title: "Global Store", imageName: "Global"),
+            CategoryItem(title: "Sports Store", imageName: "Sports"),
+            CategoryItem(title: "Decor Store", imageName: "Decor")
         ])
     ]
     override func awakeFromNib() {
@@ -108,7 +108,6 @@ extension CategorySectionCell: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return sections.count
     }
-
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         return sections[section].items.count
