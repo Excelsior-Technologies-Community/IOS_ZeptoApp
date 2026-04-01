@@ -178,7 +178,7 @@ extension ViewController: UICollectionViewDataSource,
             return CGSize(width: width, height: 1350)
         }
         if indexPath.item == contentIndex + 3 {
-            return CGSize(width: width, height: 450)
+            return CGSize(width: width, height: 400)
         }
 
         

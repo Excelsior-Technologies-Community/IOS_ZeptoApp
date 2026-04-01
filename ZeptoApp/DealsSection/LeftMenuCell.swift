@@ -36,7 +36,7 @@ class LeftMenuCell: UICollectionViewCell {
         
         // 👉 FIRST CELL (SPECIAL TEXT)
         if index == 0 {
-            titleLabel.text = "BEST OF ALL\n DEALS"
+            titleLabel.text = "BEST \nDEALS"
         } else {
             titleLabel.text = "\n\(title)"
         }
