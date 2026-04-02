@@ -21,11 +21,11 @@ class HomeHeaderFullCell: UICollectionViewCell {
     @IBOutlet weak var tissueUIView: UIView!
     @IBOutlet weak var FirstUIVIew: UIView!
     // MARK: - Outlets
-    @IBOutlet weak var collectionview: UICollectionView!
+    
     @IBOutlet weak var ThirdView: UIView!
     @IBOutlet weak var tissueUI: UIView!
     @IBOutlet weak var searchUI: UIView!
-    
+    var selectedIndex: Int = 0
     @IBOutlet weak var SecondsUI: UIView!
     
     @IBOutlet weak var offMainUIview: UIView!
@@ -76,7 +76,8 @@ class HomeHeaderFullCell: UICollectionViewCell {
         setupUI()
         setupCollectionView()
         setupGestures()
-        
+        updateSelection(index: 0)
+//        collectionview.reloadData()
     }
 
     func setupUI() {
