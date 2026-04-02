@@ -46,7 +46,7 @@
             </constraints>
             <size key="customSize" width="314" height="215"/>
             <connections>
-                <outlet property="imageView" destination="813-0g-X6G" id="S8n-mX-70W"/>
+                <outlet property="bannerImageView" destination="813-0g-X6G" id="iEX-aH-ZnI"/>
             </connections>
             <point key="canvasLocation" x="331.29770992366412" y="46.83098591549296"/>
         </collectionViewCell>

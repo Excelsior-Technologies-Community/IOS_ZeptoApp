@@ -37,6 +37,8 @@ class ViewController: UIViewController {
         Collectionview.dataSource = self
         Collectionview.register(UINib(nibName: "ZeptoContentCell", bundle: nil),
                                 forCellWithReuseIdentifier: "ZeptoContentCell")
+     Collectionview.register(UINib(nibName: "FlashDealsSectionCell", bundle: nil),
+                                forCellWithReuseIdentifier: "FlashDealsSectionCell")
         Collectionview.register(
             UINib(nibName: "SeeMoreCell", bundle: nil),
             forCellWithReuseIdentifier: "SeeMoreCell"
@@ -56,6 +58,10 @@ class ViewController: UIViewController {
         Collectionview.register(UINib(nibName: "TabsCell", bundle: nil),  forCellWithReuseIdentifier: "TabsCell")
         Collectionview.register(UINib(nibName: "CouponsOffersCell", bundle: nil),  forCellWithReuseIdentifier: "CouponsOffersCell")
         Collectionview.register(UINib(nibName: "BuyAgainProductsCell", bundle: nil),  forCellWithReuseIdentifier: "BuyAgainProductsCell")
+        Collectionview.register(
+            UINib(nibName: "HomeBannerSectionCell", bundle: nil),
+            forCellWithReuseIdentifier: "HomeBannerSectionCell"
+        )
     }
 }
 extension ViewController: UICollectionViewDataSource,
@@ -66,7 +72,7 @@ extension ViewController: UICollectionViewDataSource,
                         numberOfItemsInSection section: Int) -> Int {
 
         // Header + (Tabs optional) + Content + Coupons
-        return isTabsHidden ? 6 : 7
+        return isTabsHidden ? 7 : 8
     }
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -150,6 +156,17 @@ extension ViewController: UICollectionViewDataSource,
                 for: indexPath
             )
         }
+        
+        if indexPath.item == contentIndex + 5 {
+            let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: "HomeBannerSectionCell",
+                    for: indexPath
+                ) as! HomeBannerSectionCell
+
+                return cell
+        }
+        
+        
 
         return UICollectionViewCell()
     }
@@ -191,6 +208,7 @@ extension ViewController: UICollectionViewDataSource,
           if indexPath.item == contentIndex + 4 {
             return CGSize(width: width, height: 640)
         }
+        if indexPath.item == contentIndex + 5 {   return CGSize(width: collectionView.frame.width, height: 200)}
 
         
         return CGSize(width: width, height: 0)
