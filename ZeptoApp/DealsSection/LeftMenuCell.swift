@@ -34,16 +34,20 @@ class LeftMenuCell: UICollectionViewCell {
     // MARK: - Configure
     func configure(title: String, isSelected: Bool, index: Int) {
         
-        // 👉 FIRST CELL (SPECIAL TEXT)
         if index == 0 {
-            titleLabel.text = "BEST \nDEALS"
-        } else {
-            titleLabel.text = "\n\(title)"
+            // FIRST BUTTON
+            titleLabel.text = "9"
+        } else  if index == 1 {
+            // OTHER BUTTONS
+            titleLabel.text = "19"
+        }
+        else  if index == 2{
+            titleLabel.text = "29"
         }
         
-        // 👉 SELECTION UI
+        // Selection UI
         if isSelected {
-            containerView.backgroundColor = UIColor(hex: "#E4F9EB") // your green
+            containerView.backgroundColor = UIColor(hex: "#E4F9EB")
             titleLabel.textColor = .black
         } else {
             containerView.backgroundColor = .white
