@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -35,7 +34,7 @@
                                 </collectionViewFlowLayout>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="NYQ-2w-Gss">
-                                <rect key="frame" x="98" y="0.0" width="186" height="250"/>
+                                <rect key="frame" x="100" y="0.0" width="184" height="250"/>
                                 <color key="backgroundColor" red="0.9686274528503418" green="0.97254902124404907" blue="0.97647058963775635" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BbN-Ng-p3f">
                                     <size key="itemSize" width="128" height="128"/>
@@ -45,14 +44,14 @@
                                 </collectionViewFlowLayout>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.96862745098039216" green="0.97254901960784312" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="gnV-fz-eWW" secondAttribute="bottom" id="0yd-dO-Q24"/>
                             <constraint firstItem="gnV-fz-eWW" firstAttribute="leading" secondItem="Jm3-Ve-aoQ" secondAttribute="leading" id="JPF-ut-YIb"/>
                             <constraint firstItem="NYQ-2w-Gss" firstAttribute="top" secondItem="Jm3-Ve-aoQ" secondAttribute="top" id="K7q-tS-mek"/>
                             <constraint firstAttribute="trailing" secondItem="NYQ-2w-Gss" secondAttribute="trailing" id="d27-7h-YCL"/>
                             <constraint firstItem="gnV-fz-eWW" firstAttribute="top" secondItem="Jm3-Ve-aoQ" secondAttribute="top" id="lGw-Kg-u67"/>
-                            <constraint firstItem="NYQ-2w-Gss" firstAttribute="leading" secondItem="gnV-fz-eWW" secondAttribute="trailing" constant="8" id="lyB-8B-Zjc"/>
+                            <constraint firstItem="NYQ-2w-Gss" firstAttribute="leading" secondItem="gnV-fz-eWW" secondAttribute="trailing" constant="10" id="lyB-8B-Zjc"/>
                             <constraint firstAttribute="bottom" secondItem="NYQ-2w-Gss" secondAttribute="bottom" id="nXY-6Y-mXM"/>
                         </constraints>
                     </view>
@@ -73,9 +72,4 @@
             <point key="canvasLocation" x="308.39694656488547" y="-12.67605633802817"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

@@ -6,7 +6,11 @@
 //
 
 import UIKit
-
+struct TopCategory {
+    let title: String
+    let normalImage: String
+    let selectedImage: String
+}
 enum CategoryType: Int, CaseIterable {
     case all, cafe, fruits, dairy, snacks, drinks
     
@@ -34,8 +38,15 @@ enum CategoryType: Int, CaseIterable {
 }
 class BuyAgainProductsCell: UICollectionViewCell {
 
-
-   
+    let categories: [TopCategory] = [
+        TopCategory(title: "All Items", normalImage: "All", selectedImage: "AllSelected"),
+        TopCategory(title: "Zepto Cafe", normalImage: "Zeptocafe", selectedImage: "ZeptocafeSeelcted"),
+        TopCategory(title: "Fruits & Veggies", normalImage: "Fruitesproducst", selectedImage: "FruitesproducstSelectedpng"),
+        TopCategory(title: "Dairy", normalImage: "Dairyproduct", selectedImage: "DairySelected"),
+        TopCategory(title: "Snacks", normalImage: "SnacksPro", selectedImage: "SnacksProSelected"),
+        TopCategory(title: "Drinks", normalImage: "Bunsproducts", selectedImage: "BunsSeelcted")
+    ]
+    var selectedIndex = 0
     var selectedCategoryIndex = 0
     var products: [CategoryType: [DealsProduct]] = [:]
     @IBOutlet weak var productCollectionView: UICollectionView!
@@ -122,13 +133,12 @@ extension BuyAgainProductsCell: UICollectionViewDataSource, UICollectionViewDele
         if collectionView == topCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TopButtonsCell", for: indexPath) as! TopButtonsCell
 
-            let category = CategoryType.allCases[indexPath.item]
-         
+            let category = categories[indexPath.item]
             cell.configure(
-                title: category.title,
-                imageName: category.image,
-                isSelected: indexPath.item == selectedCategoryIndex
+                category: category,
+                isSelected: indexPath.item == selectedIndex
             )
+
             return cell
         }
         
@@ -149,21 +159,22 @@ extension BuyAgainProductsCell: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == topCollectionView{
-            selectedCategoryIndex = indexPath.item
-            topCollectionView.reloadData()
-            productCollectionView.reloadData()
-        }
+        selectedIndex = indexPath.item
+        collectionView.reloadData()
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == topCollectionView{
-            return (CGSize(width: 80, height: 130))
+            let width = collectionView.frame.width / 5
+            return CGSize(width: width, height: 100)
         }
         return (CGSize(width: (collectionView.frame.width / 2) - 12, height: 228))
     }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 6
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 8
     }

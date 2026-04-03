@@ -35,9 +35,6 @@
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="048-sO-QMw">
                                         <rect key="frame" x="0.0" y="0.0" width="73" height="120"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="120" id="b06-P2-Nu9"/>
-                                        </constraints>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>

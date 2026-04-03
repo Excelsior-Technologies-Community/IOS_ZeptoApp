@@ -119,6 +119,7 @@ extension DealsSectionView: UICollectionViewDelegate, UICollectionViewDataSource
             return products[deal]?.count ?? 0
         }
     }
+    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -126,14 +127,35 @@ extension DealsSectionView: UICollectionViewDelegate, UICollectionViewDataSource
         if collectionView == leftCollectionView {
             
             let totalItems = DealType.allCases.count
-            let height = collectionView.frame.height / CGFloat(totalItems) - 10
+            let height = collectionView.frame.height / CGFloat(totalItems) - 15
             
             return CGSize(width: collectionView.frame.width, height: height)
+        }
+        
+        if collectionView == rightCollectionView {
+            
+            let totalItems = DealType.allCases.count
+            let height = collectionView.frame.height / CGFloat(totalItems) + 40
+            
+            return CGSize(width: collectionView.frame.width / 2, height: height)
         }
         
         
         
         return CGSize(width: 120, height: 190)
+    }
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        if collectionView == rightCollectionView {
+            return UIEdgeInsets(top: 10, left: 10, bottom: 20, right: 10)
+        }
+        if collectionView == leftCollectionView {
+            return UIEdgeInsets(top: 10, left: 10, bottom: 30, right: 10)
+        }
+        
+        return .zero
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
