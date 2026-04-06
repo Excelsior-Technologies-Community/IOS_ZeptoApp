@@ -19,12 +19,15 @@ class HorizontalProductsCell: UICollectionViewCell {
     ]
     override func awakeFromNib() {
         super.awakeFromNib()
-
+        backgroundColor = .clear
+        contentView.backgroundColor = .clear
         collectionView.delegate = self
         collectionView.dataSource = self
 
         collectionView.backgroundColor = .clear
-
+        collectionView.backgroundColor = .clear
+        self.backgroundColor = .clear
+        self.contentView.backgroundColor = .clear
         collectionView.register(
             UINib(nibName: "ProductItemCell", bundle: nil),
             forCellWithReuseIdentifier: "ProductItemCell"

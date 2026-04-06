@@ -148,9 +148,6 @@ extension DealsSectionView: UICollectionViewDelegate, UICollectionViewDataSource
             
             return CGSize(width: collectionView.frame.width / 2, height: height - 15)
         }
-        
-        
-        
         return CGSize(width: 120, height: 190)
     }
     func collectionView(_ collectionView: UICollectionView,

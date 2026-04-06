@@ -12,7 +12,6 @@ class TabsCell: UICollectionViewCell {
     var selectedTabIndex = 0
     @IBOutlet weak var collectionView: UICollectionView!
 
-//    let tabs = ["All", "Sale", "Home", "Beauty", "Dairy"]
     let tabs: [TabItem] = [
         TabItem(title: "All", imageName: "image"),
         TabItem(title: "Sale", imageName: "sales"),
@@ -26,7 +25,15 @@ class TabsCell: UICollectionViewCell {
            collectionView.backgroundView = nil  
         collectionView.delegate = self
         collectionView.dataSource = self
-
+        collectionView.backgroundColor = .clear
+        self.backgroundColor = .clear
+        
+            backgroundColor = .clear
+            contentView.backgroundColor = .clear
+            
+            collectionView.backgroundColor = .clear
+            collectionView.isOpaque = false
+        self.contentView.backgroundColor = .clear
         collectionView.register(UINib(nibName: "TabButtonCell", bundle: nil),
                                 forCellWithReuseIdentifier: "TabButtonCell")
     }
