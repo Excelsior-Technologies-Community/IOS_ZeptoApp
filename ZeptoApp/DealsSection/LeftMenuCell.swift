@@ -14,7 +14,7 @@ class LeftMenuCell: UICollectionViewCell {
     // MARK: - Outlets
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
-    
+    @IBOutlet weak var selectionIndicator: UIView!
     // MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,31 +30,23 @@ class LeftMenuCell: UICollectionViewCell {
         titleLabel.numberOfLines = 2
         titleLabel.font = .systemFont(ofSize: 13, weight: .semibold)
     }
-    
-    // MARK: - Configure
-    func configure(title: String, isSelected: Bool, index: Int) {
+    func configure(title: String, isSelected: Bool) {
         
-        if index == 0 {
-            // FIRST BUTTON
-            titleLabel.text = "9"
-        } else  if index == 1 {
-            // OTHER BUTTONS
-            titleLabel.text = "19"
-        }
-        else  if index == 2{
-            titleLabel.text = "29"
+        titleLabel.text = title
+        
+        // Indicator animation
+        UIView.animate(withDuration: 0.2) {
+            self.selectionIndicator.alpha = isSelected ? 1 : 0
         }
         
-        // Selection UI
         if isSelected {
-            containerView.backgroundColor = UIColor(hex: "#E4F9EB")
-            titleLabel.textColor = .black
+            containerView.backgroundColor = UIColor(hex: "#E6F4EA") 
+            titleLabel.textColor = UIColor(hex: "#2E7D32")
         } else {
             containerView.backgroundColor = .white
-            titleLabel.textColor = .darkGray
+            titleLabel.textColor = .black
         }
     }
-    
     // MARK: - Reuse Fix
     override func prepareForReuse() {
         super.prepareForReuse()

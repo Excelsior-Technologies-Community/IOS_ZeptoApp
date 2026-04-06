@@ -14,12 +14,12 @@ class HomeBannerSectionCell: UICollectionViewCell {
     var banners: [BannerItem] = [
         BannerItem(imageName: "Banner"),
         BannerItem(imageName: "Banner1"),
-        BannerItem(imageName: "banner2"),
-        BannerItem(imageName: "banner3"),
+        BannerItem(imageName: "Banner2"),
+        BannerItem(imageName: "Banner3"),
         BannerItem(imageName: "Banner4"),
-        BannerItem(imageName: "banner5"),
-        BannerItem(imageName: "banner7"),
-        BannerItem(imageName: "banner8")
+        BannerItem(imageName: "Banner5"),
+        BannerItem(imageName: "Banner7"),
+        BannerItem(imageName: "Banner8")
     ]
 
     override func awakeFromNib() {

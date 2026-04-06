@@ -22,11 +22,11 @@ enum DealType: Int, CaseIterable {
 }
 struct DealsProduct {
     let name: String
-    let price: String          // ₹9
-    let cuttedPrice: String    // ₹20
-    let offPrice: String       // "₹11 OFF"
-    let brandName: String      // "Amul"
-    let quantity: String       // "1 pack (20g)"
+    let price: String
+    let cuttedPrice: String
+    let offPrice: String
+    let brandName: String
+    let quantity: String
     let image: String
 }
 class DealsSectionView: UICollectionViewCell {
@@ -38,6 +38,10 @@ class DealsSectionView: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        leftCollectionView.showsVerticalScrollIndicator = false
+        leftCollectionView.showsHorizontalScrollIndicator = false
+        rightCollectionView.showsVerticalScrollIndicator = false
+        rightCollectionView.showsHorizontalScrollIndicator = false
         leftCollectionView.delegate = self
         leftCollectionView.dataSource = self
         
@@ -50,6 +54,7 @@ class DealsSectionView: UICollectionViewCell {
         leftCollectionView.register(UINib(nibName: "LeftMenuCell", bundle: nil),  forCellWithReuseIdentifier: "LeftMenuCell")
         rightCollectionView.register(UINib(nibName: "ProductCell", bundle: nil),  forCellWithReuseIdentifier: "ProductCell")
     }
+    
     func setupData() {
         products = [
             .best: [
@@ -127,17 +132,21 @@ extension DealsSectionView: UICollectionViewDelegate, UICollectionViewDataSource
         if collectionView == leftCollectionView {
             
             let totalItems = DealType.allCases.count
-            let height = collectionView.frame.height / CGFloat(totalItems) - 15
             
-            return CGSize(width: collectionView.frame.width, height: height)
+            // Remove spacing influence
+            let spacing: CGFloat = 10
+            
+            let height = (collectionView.frame.height - (CGFloat(totalItems - 1) * spacing)) / CGFloat(totalItems)
+            
+            return CGSize(width: collectionView.frame.width, height: height - 7)
         }
         
         if collectionView == rightCollectionView {
             
             let totalItems = DealType.allCases.count
-            let height = collectionView.frame.height / CGFloat(totalItems) + 40
+            let height = collectionView.frame.height / CGFloat(totalItems)
             
-            return CGSize(width: collectionView.frame.width / 2, height: height)
+            return CGSize(width: collectionView.frame.width / 2, height: height - 15)
         }
         
         
@@ -149,10 +158,11 @@ extension DealsSectionView: UICollectionViewDelegate, UICollectionViewDataSource
                         insetForSectionAt section: Int) -> UIEdgeInsets {
         
         if collectionView == rightCollectionView {
-            return UIEdgeInsets(top: 10, left: 10, bottom: 20, right: 10)
+            return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         }
         if collectionView == leftCollectionView {
-            return UIEdgeInsets(top: 10, left: 10, bottom: 30, right: 10)
+            
+            return UIEdgeInsets(top: 10, left: 10, bottom: -30, right: 10)
         }
         
         return .zero
@@ -160,17 +170,18 @@ extension DealsSectionView: UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if collectionView == leftCollectionView {
+            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeftMenuCell", for: indexPath) as! LeftMenuCell
             
             let deal = DealType.allCases[indexPath.item]
+            
             cell.configure(
                 title: deal.title,
-                isSelected: indexPath.item == selectedIndex,
-                index: indexPath.item   // ✅ add this
+                isSelected: indexPath.item == selectedIndex
             )
-            return cell
             
-        } else {
+            return cell
+        }else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as! ProductCell
             
             let deal = DealType.allCases[selectedIndex]

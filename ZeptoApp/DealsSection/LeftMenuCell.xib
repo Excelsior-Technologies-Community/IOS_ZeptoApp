@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -22,13 +21,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="199" height="208"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mNV-Id-OMy">
-                                <rect key="frame" x="0.0" y="20" width="199" height="168"/>
+                                <rect key="frame" x="5" y="20" width="194" height="168"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uic-xR-8md">
-                                        <rect key="frame" x="0.0" y="0.0" width="199" height="79"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="194" height="79"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deals at" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kf5-bX-pmF">
-                                                <rect key="frame" x="10" y="58.666666666666679" width="179" height="20.333333333333336"/>
+                                                <rect key="frame" x="10" y="58.666666666666679" width="174" height="20.333333333333336"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -42,10 +41,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XRZ-o5-q2T">
-                                        <rect key="frame" x="0.0" y="89" width="199" height="79"/>
+                                        <rect key="frame" x="0.0" y="89" width="194" height="79"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4TP-5L-0X3">
-                                                <rect key="frame" x="10" y="0.0" width="179" height="20.333333333333332"/>
+                                                <rect key="frame" x="10" y="0.0" width="174" height="20.333333333333332"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20.329999999999998" id="uui-5G-ZPf"/>
@@ -65,13 +64,21 @@
                                     </view>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BAg-80-21q">
+                                <rect key="frame" x="0.0" y="10" width="5" height="188"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="mNV-Id-OMy" firstAttribute="leading" secondItem="RuY-jV-HQT" secondAttribute="leading" id="DX6-I6-8Wc"/>
+                            <constraint firstItem="mNV-Id-OMy" firstAttribute="leading" secondItem="RuY-jV-HQT" secondAttribute="leading" constant="5" id="DX6-I6-8Wc"/>
                             <constraint firstAttribute="trailing" secondItem="mNV-Id-OMy" secondAttribute="trailing" id="UUQ-kZ-5GO"/>
+                            <constraint firstAttribute="bottom" secondItem="BAg-80-21q" secondAttribute="bottom" constant="10" id="YQz-vx-huk"/>
+                            <constraint firstItem="BAg-80-21q" firstAttribute="leading" secondItem="RuY-jV-HQT" secondAttribute="leading" id="YY5-Ts-a2g"/>
                             <constraint firstAttribute="bottom" secondItem="mNV-Id-OMy" secondAttribute="bottom" constant="20" id="lnZ-99-JH2"/>
+                            <constraint firstItem="BAg-80-21q" firstAttribute="top" secondItem="RuY-jV-HQT" secondAttribute="top" constant="10" id="sFI-iP-xWi"/>
                             <constraint firstItem="mNV-Id-OMy" firstAttribute="top" secondItem="RuY-jV-HQT" secondAttribute="top" constant="20" id="xwt-fM-pEK"/>
+                            <constraint firstItem="mNV-Id-OMy" firstAttribute="leading" secondItem="BAg-80-21q" secondAttribute="trailing" id="zqG-9B-Gtj"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -86,14 +93,10 @@
             <size key="customSize" width="199" height="208"/>
             <connections>
                 <outlet property="containerView" destination="RuY-jV-HQT" id="LDq-dg-0qg"/>
+                <outlet property="selectionIndicator" destination="BAg-80-21q" id="DJh-NS-fuG"/>
                 <outlet property="titleLabel" destination="4TP-5L-0X3" id="O1e-hf-r6L"/>
             </connections>
             <point key="canvasLocation" x="243.51145038167937" y="42.95774647887324"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

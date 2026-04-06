@@ -114,69 +114,116 @@ class BuyAgainProductsCell: UICollectionViewCell {
     }
 }
 
-
-extension BuyAgainProductsCell: UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout{
+extension BuyAgainProductsCell: UICollectionViewDataSource,
+                                 UICollectionViewDelegate,
+                                 UICollectionViewDelegateFlowLayout {
     
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    // MARK: - Count
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
+        
         if collectionView == topCollectionView {
-            return CategoryType.allCases.count
+            return categories.count   
         } else {
             let category = CategoryType.allCases[selectedCategoryIndex]
             return products[category]?.count ?? 0
         }
-        return 0
     }
     
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == topCollectionView{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TopButtonsCell", for: indexPath) as! TopButtonsCell
-
+    // MARK: - Cell
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        // 🔝 TOP CATEGORY
+        if collectionView == topCollectionView {
+            
+            guard indexPath.item < categories.count else {
+                return UICollectionViewCell()
+            }
+            
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "TopButtonsCell",
+                for: indexPath
+            ) as! TopButtonsCell
+            
             let category = categories[indexPath.item]
+            
             cell.configure(
                 category: category,
                 isSelected: indexPath.item == selectedIndex
             )
-
+            
             return cell
         }
         
-        else if collectionView == productCollectionView{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as! ProductCell
-
+        // 🛒 PRODUCTS
+        else {
+            
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "ProductCell",
+                for: indexPath
+            ) as! ProductCell
+            
             let category = CategoryType.allCases[selectedCategoryIndex]
-
+            
             if let product = products[category]?[indexPath.item] {
                 cell.configure(product: product)
             }
-
+            
             return cell
         }
-        
-        return UICollectionViewCell()
-        
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedIndex = indexPath.item
-        collectionView.reloadData()
+    // MARK: - Selection
+    func collectionView(_ collectionView: UICollectionView,
+                        didSelectItemAt indexPath: IndexPath) {
+        
+        if collectionView == topCollectionView {
+            
+            selectedIndex = indexPath.item
+            selectedCategoryIndex = indexPath.item   // 🔥 MAIN FIX
+            
+            // Reload both
+            topCollectionView.reloadData()
+            productCollectionView.reloadData()
+            
+            // 🔥 Smooth UX
+            topCollectionView.scrollToItem(
+                at: indexPath,
+                at: .centeredHorizontally,
+                animated: true
+            )
+            
+            productCollectionView.setContentOffset(.zero, animated: true)
+        }
     }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == topCollectionView{
+    
+    // MARK: - Size
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        if collectionView == topCollectionView {
+            
             let width = collectionView.frame.width / 5
             return CGSize(width: width, height: 100)
         }
-        return (CGSize(width: (collectionView.frame.width / 2) - 12, height: 228))
+        
+        // Product Grid
+        let width = (collectionView.frame.width / 2) - 12
+        return CGSize(width: width, height: 228)
     }
+    
+    // MARK: - Spacing
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 8
     }
-    
 }
